@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TFX Perfect Trade Checklist</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #0e0e0e;
+      color: #f4f4f4;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px;
+      line-height: 1.6;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 25px;
+      color: #00ffaa;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .checklist {
+      background-color: #151515;
+      border-radius: 15px;
+      padding: 30px 35px;
+      max-width: 540px;
+      width: 100%;
+      box-shadow: 0 0 25px rgba(0, 255, 170, 0.15);
+      border: 1px solid #00ffaa20;
+    }
+
+    .section-title {
+      color: #00ffaa;
+      margin-top: 25px;
+      font-weight: 600;
+      border-bottom: 1px solid #333;
+      padding-bottom: 6px;
+      font-size: 1.1rem;
+      letter-spacing: 0.5px;
+    }
+
+    label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 8px 0;
+      font-size: 1rem;
+      background: #1d1d1d;
+      padding: 10px 15px;
+      border-radius: 10px;
+      transition: 0.3s ease;
+      cursor: pointer;
+      border: 1px solid transparent;
+    }
+
+    label:hover {
+      background-color: #222;
+      border: 1px solid #00ffaa40;
+    }
+
+    select, input[type="text"] {
+      background-color: #111;
+      color: #00ffaa;
+      border: 1px solid #00ffaa40;
+      border-radius: 8px;
+      padding: 5px 10px;
+      font-size: 1rem;
+      outline: none;
+      cursor: pointer;
+    }
+
+    input[type="checkbox"] {
+      accent-color: #00ffaa;
+      transform: scale(1.3);
+    }
+
+    .result {
+      margin-top: 30px;
+      padding: 20px;
+      border-radius: 10px;
+      text-align: center;
+      background-color: #111;
+      font-size: 1.3rem;
+      border: 1px solid #00ffaa20;
+      box-shadow: 0 0 10px rgba(0,255,170,0.1);
+    }
+
+    .good { color: #00ffaa; font-weight: 600; }
+    .neutral { color: #ffcc00; font-weight: 600; }
+    .bad { color: #ff5555; font-weight: 600; }
+
+    .trend-inputs {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .pair-input {
+      margin-bottom: 15px;
+    }
+
+    .pair-input label {
+      background: none;
+      border: none;
+      justify-content: flex-start;
+      padding: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>TFX Perfect Trade Checklist</h1>
+  
+  <div class="checklist">
+
+    <div class="pair-input">
+      <label for="pairName"><strong>Pair / Setup Name:</strong></label>
+      <input type="text" id="pairName" placeholder="e.g., EUR/USD - Break & Retest">
+    </div>
+
+    <div class="section-title">TREND DIRECTION</div>
+    <div class="trend-inputs">
+      <label><span>Weekly Trend:</span>
+        <select id="weeklyTrend">
+          <option value="">--Select--</option>
+          <option value="Bullish">Bullish</option>
+          <option value="Bearish">Bearish</option>
+        </select>
+      </label>
+      <label><span>Daily Trend:</span>
+        <select id="dailyTrend">
+          <option value="">--Select--</option>
+          <option value="Bullish">Bullish</option>
+          <option value="Bearish">Bearish</option>
+        </select>
+      </label>
+      <label><span>4HR Trend:</span>
+        <select id="fourHrTrend">
+          <option value="">--Select--</option>
+          <option value="Bullish">Bullish</option>
+          <option value="Bearish">Bearish</option>
+        </select>
+      </label>
+    </div>
+
+    <div class="section-title">WEEKLY</div>
+    <label><span>At AOI / Rejecting</span><input type="checkbox" value="10"></label>
+    <label><span>Touching EMA</span><input type="checkbox" value="5"></label>
+    <label><span>Candlestick Rejection</span><input type="checkbox" value="10"></label>
+    <label><span>Rejection from Structure</span><input type="checkbox" value="10"></label>
+    <label><span>Round Psych Level</span><input type="checkbox" value="5"></label>
+    <label><span>Patterns</span><input type="checkbox" value="10"></label>
+
+    <div class="section-title">DAILY</div>
+    <label><span>At AOI / Rejecting</span><input type="checkbox" value="10"></label>
+    <label><span>Touching EMA</span><input type="checkbox" value="5"></label>
+    <label><span>Candlestick Rejection</span><input type="checkbox" value="10"></label>
+    <label><span>Rejection from Structure</span><input type="checkbox" value="10"></label>
+    <label><span>Patterns</span><input type="checkbox" value="10"></label>
+
+    <div class="section-title">4HR CHECKLIST</div>
+    <label><span>Touching EMA</span><input type="checkbox" value="5"></label>
+    <label><span>Candlestick Rejection</span><input type="checkbox" value="10"></label>
+    <label><span>Rejection from Structure</span><input type="checkbox" value="10"></label>
+    <label><span>Patterns</span><input type="checkbox" value="10"></label>
+
+    <div class="section-title">ENTRY SIGNAL</div>
+    <label><span>SOS</span><input type="checkbox" value="10"></label>
+    <label><span>Bullish/Bearish Engulfing</span><input type="checkbox" value="10"></label>
+
+    <div class="result" id="result">Total Score: 0% — <span class="neutral">WAIT</span></div>
+  </div>
+
+  <script>
+    const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+    const result = document.getElementById('result');
+    const trends = ['weeklyTrend', 'dailyTrend', 'fourHrTrend'].map(id => document.getElementById(id));
+
+    function calculateScore() {
+      const weekly = document.getElementById('weeklyTrend').value;
+      const daily = document.getElementById('dailyTrend').value;
+      const fourHr = document.getElementById('fourHrTrend').value;
+
+      const trendValues = [weekly, daily, fourHr].filter(v => v !== "");
+      if (trendValues.length < 2) {
+        result.innerHTML = `Total Score: 0% — <span class='neutral'>⚠️ Select at least 2 timeframes</span>`;
+        return;
+      }
+
+      const bullishCount = trendValues.filter(v => v === "Bullish").length;
+      const bearishCount = trendValues.filter(v => v === "Bearish").length;
+
+      if (bullishCount < 2 && bearishCount < 2) {
+        result.innerHTML = `Total Score: 0% — <span class='bad'>❌ Trends Not in Sync</span>`;
+        return;
+      }
+
+      // Count how many timeframes are in sync
+      let trendBonus = 0;
+      if (bullishCount >= 2 || bearishCount >= 2) trendBonus = (bullishCount === 3 || bearishCount === 3) ? 30 : 20;
+
+      // Base score from checklist
+      let total = trendBonus;
+      checkboxes.forEach(c => { if (c.checked) total += parseFloat(c.value); });
+      
+      let status = '';
+      if (total >= 80) status = `<span class='good'>✅ Strong Setup — Take Trade</span>`;
+      else if (total >= 75) status = `<span class='neutral'>⚠️ Possible Setup — Wait for Confirmation</span>`;
+      else status = `<span class='bad'>❌ Weak Setup — Avoid Trade</span>`;
+      
+      result.innerHTML = `Total Score: ${total}% — ${status}`;
+    }
+
+    checkboxes.forEach(box => box.addEventListener('change', calculateScore));
+    trends.forEach(sel => sel.addEventListener('change', calculateScore));
+  </script>
+
+</body>
+</html>
