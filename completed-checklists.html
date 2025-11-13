@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TFX Completed Trade Checklists</title>
+  <link rel="icon" type="image/x-icon" href="logo.jpg">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #0e0e0e;
+      color: #f4f4f4;
+      padding: 40px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #00ffaa;
+      font-size: 2rem;
+      margin-bottom: 30px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+
+    .checklist-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .checklist-card {
+      background-color: #151515;
+      border: 1px solid #00ffaa20;
+      border-radius: 15px;
+      padding: 20px;
+      width: 300px;
+      box-shadow: 0 0 20px rgba(0,255,170,0.1);
+      transition: transform 0.2s ease;
+      position: relative;
+    }
+
+    .checklist-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 30px rgba(0,255,170,0.3);
+    }
+
+    .checklist-card h2 {
+      margin: 0 0 10px 0;
+      color: #00ffaa;
+      font-size: 1.2rem;
+    }
+
+    .checklist-card p {
+      margin: 5px 0;
+      font-size: 0.95rem;
+    }
+
+    .score-good { color: #00ffaa; font-weight: 600; }
+    .score-neutral { color: #ffcc00; font-weight: 600; }
+    .score-bad { color: #ff5555; font-weight: 600; }
+
+    .no-checklists {
+      text-align: center;
+      margin-top: 50px;
+      font-size: 1.1rem;
+      color: #ffcc00;
+    }
+
+    /* Buttons */
+    #backBtn {
+      display: block;
+      margin: 30px auto 0 auto;
+      background-color: #00ffaa;
+      color: #0e0e0e;
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+      border: none;
+      transition: 0.2s;
+    }
+
+    #backBtn:hover {
+      background-color: #00cc88;
+      color: #fff;
+    }
+
+    .deleteBtn {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background-color: #ff5555;
+      color: #fff;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.8rem;
+      transition: 0.2s;
+    }
+
+    .deleteBtn:hover {
+      background-color: #ff2222;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Completed Trade Checklists</h1>
+
+  <div class="checklist-container" id="checklistContainer"></div>
+
+  <p class="no-checklists" id="noChecklists">No checklists completed yet.</p>
+
+  <button id="backBtn" onclick="location.href='index.html'">⬅ Back to Checklist</button>
+
+  <script>
+    const container = document.getElementById('checklistContainer');
+    const noChecklists = document.getElementById('noChecklists');
+
+    function loadChecklists() {
+      container.innerHTML = ''; // clear container
+      const completedChecklists = JSON.parse(localStorage.getItem('completedChecklists')) || [];
+      
+      if (completedChecklists.length === 0) {
+        noChecklists.style.display = 'block';
+        return;
+      } else {
+        noChecklists.style.display = 'none';
+      }
+
+      completedChecklists.forEach((checklist, index) => {
+        const card = document.createElement('div');
+        card.className = 'checklist-card';
+        card.innerHTML = `
+          <h2>${checklist.name}</h2>
+          <p><strong>Date:</strong> ${checklist.date}</p>
+          <p><strong>Score:</strong> <span class="score-${checklist.status}">${checklist.score}%</span></p>
+          <button class="deleteBtn" onclick="deleteChecklist(${index})">Delete</button>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function deleteChecklist(index) {
+      const completedChecklists = JSON.parse(localStorage.getItem('completedChecklists')) || [];
+      completedChecklists.splice(index, 1); // remove selected checklist
+      localStorage.setItem('completedChecklists', JSON.stringify(completedChecklists));
+      loadChecklists(); // refresh display
+    }
+
+    loadChecklists(); // initial load
+  </script>
+
+</body>
+</html>
